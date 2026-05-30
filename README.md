@@ -15,11 +15,25 @@ You will need to install following dependencies:
   + CMake 3.28 or later
   + FLEX 2.6 or later
   + BISON 3.8 or later
-  + A C compiler
-  + LLVM 18.0 or later
+  + A C Compiler like : gcc & gcc-c++ 
+  + LLVM (dev) 18.0 or later
   + LLD 18.0 or later
+  + LIEF (!?) 
 
 ### Linux
+**Update 30/05/2026:** I have just updated 
+
+* Install packages :
+
+      sudo dnf install cmake flex bison gcc gcc-c++ gtest-devel llvm-devel lld
+
+* Compile :
+   
+      cmake -G Ninja -S . \
+      -B build-Debug\
+      -DCMAKE_BUILD_TYPE=Debug\
+      -DLLVM_DIR=/usr/lib/llvm/18/lib64/cmake/llvm\
+      -DLLD_DIR=/usr/lib/llvm/18/lib64/cmake/lld
 
 LLVM can usually be installed directly from  your  distributions  repositories.
 For example, Ubuntu users can simply install  `llvm-dev`, and CMake will detect
