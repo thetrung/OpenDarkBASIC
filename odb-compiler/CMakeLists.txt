@@ -27,7 +27,8 @@ option (ODBCOMPILER_WERROR "Treat compiler warnings as errors" ${ODB_WERROR})
 string (TOUPPER ${ODB_PLATFORM} ODBCOMPILER_PLATFORM)
 
 configure_file ("templates/config.h.in" "include/odb-compiler/config.h")
-
+# find_package(LIEF REQUIRED)
+# target_link_libraries(my-project LIEF::LIEF)
 ###############################################################################
 # Build info
 ###############################################################################
@@ -304,7 +305,14 @@ if (WIN32)
             MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>)
     add_library (LIEF::LIEF ALIAS LIB_LIEF)
 else ()
-    find_package (LIEF REQUIRED)
+  include(FetchContent)
+  FetchContent_Declare(
+    LIEF
+    GIT_REPOSITORY https://github.com/lief-project/LIEF
+    GIT_TAG        0.17.6
+  )
+  FetchContent_MakeAvailable(LIEF)
+  find_package (LIEF REQUIRED)
 endif ()
 target_link_libraries (odb-compiler PRIVATE LIEF::LIEF)
 
