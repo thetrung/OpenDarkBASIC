@@ -1,10 +1,10 @@
 # OpenDarkBASIC
-
 This  project  is a modern  re-implementation  of  the  DarkBASIC  Professional
 language and SDK.  It  consists  of  a  compiler and a runtime. The compiler is
 built using FLEX and BISON to parse the language into an AST and  uses LLVM for
 code  generation. The runtime  provides  common  runtime  functionality  and  a
 framework for plugins to register commands.
+* 30/05/2026 : This one is too old & fragile to build for actually usage nowadays..
 
 OpenDarkBASIC  supports  both  the  original DarkBASIC Pro SDK and the ODB  SDK
 (reimplementation). Of course,  the  original  SDK  will  only work on Windows.
@@ -21,13 +21,13 @@ You will need to install following dependencies:
   + LIEF (!?) 
 
 ### Linux
-**Update 30/05/2026:** I have just updated 
+**Update 30/05/2026:** I have just updated something with a simple **makefile** but surely not yet enough to make this running due to old `LIEF` dependency.
 
-* Install packages :
+* Install packages with `make install` OR :
 
       sudo dnf install cmake flex bison gcc gcc-c++ gtest-devel llvm-devel lld
 
-* Compile :
+* Compile with `make build` OR :
    
       cmake -G Ninja -S . \
       -B build-Debug\
@@ -35,9 +35,13 @@ You will need to install following dependencies:
       -DLLVM_DIR=/usr/lib/llvm/18/lib64/cmake/llvm\
       -DLLD_DIR=/usr/lib/llvm/18/lib64/cmake/lld
 
+* Clean up with `make clean` OR :
+
+       rm -rf build-Debug
+
 LLVM can usually be installed directly from  your  distributions  repositories.
-For example, Ubuntu users can simply install  `llvm-dev`, and CMake will detect
-it.
+For example, Ubuntu users can simply install  `llvm-dev` (or `llvm-devel` on Fedora), 
+and CMake will detect it.
 
 It can also be [built from source](#building-llvm).
 
